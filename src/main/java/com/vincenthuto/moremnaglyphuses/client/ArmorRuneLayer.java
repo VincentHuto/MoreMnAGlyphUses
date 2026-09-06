@@ -36,7 +36,7 @@ public final class ArmorRuneLayer<T extends LivingEntity, M extends HumanoidMode
         var material = SpineGlyphs.readMaterial(chest);
         for (int index = 0; index < ids.size(); index++) {
             pose.pushPose();
-            pose.translate(transform.x(), transform.y(index), transform.z());
+            pose.translate(transform.x(index), transform.y(index), transform.z());
             pose.mulPose(Axis.ZP.rotationDegrees(transform.roll()));
             if (material == SpineGlyphs.Material.GLYPH) {
                 pose.mulPose(Axis.YP.rotationDegrees(180.0F));
