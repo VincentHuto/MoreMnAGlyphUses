@@ -19,7 +19,7 @@ minecraft {
         configureEach {
             workingDirectory project.file('run')
             property 'forge.logging.console.level', 'info'
-            arg '-mixin.config=moremnatomecolors.mixins.json'
+            arg '-mixin.config=moremnaglyphuses.mixins.json'
             mods { "${mod_id}" { source sourceSets.main } }
         }
         client { args '--username', 'Huto' }
@@ -28,8 +28,8 @@ minecraft {
 }
 
 mixin {
-    add sourceSets.main, 'moremnatomecolors.refmap.json'
-    config 'moremnatomecolors.mixins.json'
+    add sourceSets.main, 'moremnaglyphuses.refmap.json'
+    config 'moremnaglyphuses.mixins.json'
 }
 
 repositories {
@@ -58,6 +58,6 @@ tasks.named('processResources', ProcessResources).configure {
 }
 
 tasks.named('jar', Jar).configure {
-    manifest.attributes('MixinConfigs': 'moremnatomecolors.mixins.json')
+    manifest.attributes('MixinConfigs': 'moremnaglyphuses.mixins.json')
     finalizedBy 'reobfJar'
 }
