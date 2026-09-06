@@ -31,6 +31,7 @@ public final class MoreMnAGlyphUses {
         var material = SpineGlyphs.readMaterial(event.getItemStack());
         String heading = material == SpineGlyphs.Material.CHALK ? "tooltip.moremnaglyphuses.chalk_spine_runes"
                 : material == SpineGlyphs.Material.METAL ? "tooltip.moremnaglyphuses.metal_spine_runes"
+                : material == SpineGlyphs.Material.GLYPH ? "tooltip.moremnaglyphuses.glyph_spine_runes"
                 : "tooltip.moremnaglyphuses.spine_glyphs";
         event.getToolTip().add(Component.translatable(heading).withStyle(ChatFormatting.GRAY));
         glyphs.forEach(glyph -> event.getToolTip().add(Component.literal("  ").append(glyph.getHoverName()).withStyle(ChatFormatting.DARK_GRAY)));

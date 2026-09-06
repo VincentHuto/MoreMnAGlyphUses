@@ -1,7 +1,6 @@
 package com.vincenthuto.moremnaglyphuses.recipe;
 
 import com.mna.items.runes.StoneRune;
-import com.mna.items.ItemInit;
 import com.vincenthuto.moremnaglyphuses.MoreMnAGlyphUses;
 import com.vincenthuto.moremnaglyphuses.SpineGlyphs;
 import java.util.ArrayList;
@@ -79,9 +78,8 @@ public final class DecorateTomeRecipe extends CustomRecipe {
     }
 
     private static SpineGlyphs.Material material(ItemStack stack) {
-        if (stack.is(ItemInit.WIZARD_CHALK.get())) return SpineGlyphs.Material.CHALK;
-        if (stack.is(ItemInit.RUNESMITH_HAMMER.get())) return SpineGlyphs.Material.METAL;
-        return null;
+        return stack.isEmpty() ? null
+                : SpineGlyphs.materialForCatalyst(ForgeRegistries.ITEMS.getKey(stack.getItem()));
     }
 
     @Override

@@ -38,7 +38,12 @@ public final class ArmorRuneLayer<T extends LivingEntity, M extends HumanoidMode
             pose.pushPose();
             pose.translate(transform.x(), transform.y(index), transform.z());
             pose.mulPose(Axis.ZP.rotationDegrees(transform.roll()));
-            if (material != null) {
+            if (material == SpineGlyphs.Material.GLYPH) {
+                pose.mulPose(Axis.YP.rotationDegrees(180.0F));
+                pose.scale(transform.scale(), transform.scale(), transform.scale());
+                SpineRuneRenderer.renderGlyph(ids.get(index), pose, buffers, light,
+                        OverlayTexture.NO_OVERLAY, itemRenderer);
+            } else if (material != null) {
                 SpineRuneRenderer.renderArmor(ids.get(index), material, pose, buffers, light, transform.scale());
             } else if (!SpineGlyphs.hasMaterialKey(chest)) {
                 ItemStack glyph = SpineGlyphs.resolve(ids.get(index));

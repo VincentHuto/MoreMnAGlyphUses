@@ -10,12 +10,23 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.ModelEvent;
+import com.vincenthuto.moremnaglyphuses.SpineGlyphs;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = MoreMnAGlyphUses.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class ClientEvents {
     private ClientEvents() {}
+
+    @SubscribeEvent
+    public static void registerGlyphModels(ModelEvent.RegisterAdditional event) {
+        SpineGlyphs.CHALK_RUNE_LETTERS.keySet().stream()
+                .map(color -> SpineGlyphs.glyphModel(
+                        ResourceLocation.fromNamespaceAndPath("mna", "stone_rune_" + color)))
+                .forEach(event::register);
+    }
 
     @SubscribeEvent
     public static void addPlayerLayers(EntityRenderersEvent.AddLayers event) {

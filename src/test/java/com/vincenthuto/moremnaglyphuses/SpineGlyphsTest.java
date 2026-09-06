@@ -47,6 +47,28 @@ class SpineGlyphsTest {
     }
 
     @Test
+    void storesGlyphOnlyMaterialAndDerivesItsModelFromTheRuneColor() {
+        CompoundTag book = new CompoundTag();
+        SpineGlyphs.writeTag(book, List.of(id("stone_rune_light_blue")), SpineGlyphs.Material.GLYPH);
+
+        assertEquals(SpineGlyphs.Material.GLYPH, SpineGlyphs.readMaterial(book));
+        assertEquals(ResourceLocation.tryParse("moremnaglyphuses:item/spine_glyphs/light_blue"),
+                SpineGlyphs.glyphModel(id("stone_rune_light_blue")));
+        assertNull(SpineGlyphs.glyphModel(id("stone_rune_blank")));
+    }
+
+    @Test
+    void runesmithChiselSelectsGlyphOnlyMaterial() {
+        assertEquals(SpineGlyphs.Material.GLYPH,
+                SpineGlyphs.materialForCatalyst(id("runesmith_chisel")));
+        assertEquals(SpineGlyphs.Material.CHALK,
+                SpineGlyphs.materialForCatalyst(id("wizard_chalk")));
+        assertEquals(SpineGlyphs.Material.METAL,
+                SpineGlyphs.materialForCatalyst(id("runesmith_hammer")));
+        assertNull(SpineGlyphs.materialForCatalyst(id("runic_malus")));
+    }
+
+    @Test
     void catalystFreeDecorationClearsPreviousMaterial() {
         CompoundTag book = new CompoundTag();
         SpineGlyphs.writeTag(book, List.of(id("stone_rune_red")), SpineGlyphs.Material.METAL);

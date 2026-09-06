@@ -57,7 +57,7 @@ public final class SpineGlyphs {
             Map.entry("white", 'h'));
 
     public enum Material {
-        CHALK("chalk"), METAL("metal");
+        CHALK("chalk"), METAL("metal"), GLYPH("glyph");
 
         private final String id;
 
@@ -161,6 +161,25 @@ public final class SpineGlyphs {
         Map<String, Character> letters = material == Material.METAL ? METAL_RUNE_LETTERS : CHALK_RUNE_LETTERS;
         Character letter = letters.get(id.getPath().substring(prefix.length()));
         return letter == null || letter < 'a' || letter > 'p' ? -1 : letter - 'a';
+    }
+
+    public static ResourceLocation glyphModel(ResourceLocation id) {
+        if (id == null || !"mna".equals(id.getNamespace())) return null;
+        String prefix = "stone_rune_";
+        if (!id.getPath().startsWith(prefix)) return null;
+        String color = id.getPath().substring(prefix.length());
+        return CHALK_RUNE_LETTERS.containsKey(color)
+                ? ResourceLocation.fromNamespaceAndPath(MoreMnAGlyphUses.MODID, "item/spine_glyphs/" + color) : null;
+    }
+
+    public static Material materialForCatalyst(ResourceLocation id) {
+        if (id == null || !"mna".equals(id.getNamespace())) return null;
+        return switch (id.getPath()) {
+            case "wizard_chalk" -> Material.CHALK;
+            case "runesmith_hammer" -> Material.METAL;
+            case "runesmith_chisel" -> Material.GLYPH;
+            default -> null;
+        };
     }
 
     public static boolean isArmorTarget(ResourceLocation id) {

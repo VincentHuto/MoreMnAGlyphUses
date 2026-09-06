@@ -23,7 +23,7 @@ public abstract class ItemBookRendererMixin {
             PoseStack pose, MultiBufferSource buffers, int light, int overlay, CallbackInfo ci) {
         if (context != ItemDisplayContext.GUI) return;
         var material = SpineGlyphs.readMaterial(book);
-        if (material != null) {
+        if (material != null && material != SpineGlyphs.Material.GLYPH) {
             var glyphIds = SpineGlyphs.readIds(book);
             for (int i = 0; i < glyphIds.size(); i++) {
                 double[] position = inventoryPosition(book, i);
@@ -31,6 +31,21 @@ public abstract class ItemBookRendererMixin {
                 pose.translate(position[0], position[1], position[2]);
                 SpineRuneRenderer.render(glyphIds.get(i), material, pose, buffers, light,
                         SpineGlyphTransform.inventoryScale());
+                pose.popPose();
+            }
+            return;
+        }
+        if (material == SpineGlyphs.Material.GLYPH) {
+            var glyphIds = SpineGlyphs.readIds(book);
+            var renderer = Minecraft.getInstance().getItemRenderer();
+            for (int i = 0; i < glyphIds.size(); i++) {
+                double[] position = inventoryPosition(book, i);
+                pose.pushPose();
+                pose.translate(position[0], position[1], position[2]);
+                pose.mulPose(Axis.YP.rotationDegrees(90.0F));
+                float scale = SpineGlyphTransform.inventoryScale();
+                pose.scale(scale, scale, scale);
+                SpineRuneRenderer.renderGlyph(glyphIds.get(i), pose, buffers, light, overlay, renderer);
                 pose.popPose();
             }
             return;
