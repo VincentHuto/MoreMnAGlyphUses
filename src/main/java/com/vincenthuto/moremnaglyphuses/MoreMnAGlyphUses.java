@@ -1,6 +1,8 @@
 package com.vincenthuto.moremnaglyphuses;
 
+import com.mna.api.guidebook.RegisterGuidebooksEvent;
 import com.vincenthuto.moremnaglyphuses.recipe.DecorateTomeRecipe;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -23,6 +25,11 @@ public final class MoreMnAGlyphUses {
     public MoreMnAGlyphUses(FMLJavaModLoadingContext context) {
         RECIPE_SERIALIZERS.register(context.getModEventBus());
         MinecraftForge.EVENT_BUS.addListener(this::addTooltip);
+        MinecraftForge.EVENT_BUS.addListener(this::registerGuidebook);
+    }
+
+    private void registerGuidebook(RegisterGuidebooksEvent event) {
+        event.getRegistry().addGuidebookPath(ResourceLocation.fromNamespaceAndPath(MODID, "guide"));
     }
 
     private void addTooltip(ItemTooltipEvent event) {

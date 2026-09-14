@@ -1,0 +1,25 @@
+{
+  "More MnA Glyph Uses: Decorating with Glpyhs": {
+    "index": 900,
+    "category": "basics",
+    "tier": 1,
+    "sections": [
+      {
+        "type": "title",
+        "value": "Decorating with Glpyhs"
+      },
+      {
+        "type": "text",
+        "value": "More MnA Glyph Uses lets you decorate compatible tomes and chest armor with up to three Stone Glpyhs. These glyphs are purely cosmetic"
+      },
+      {
+        "type": "title",
+        "value": "How to Decorate"
+      },
+      {
+        "type": "text",
+        "value": "Place the tome or chest armor in the center of a crafting table, then place one to three colored glyphs down either outer column. Add Wizard's Chalk, a Runesmith's Hammer, or a Runesmith's Chisel in the middle-left slot to change how the runes are applied.\n\nDecorating the item again replaces its current runes. To remove them, place the decorated item by itself in the center of the crafting table."
+      }
+    ]
+  }
+}
